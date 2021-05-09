@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Login Page";
+}
+
+@model LoginManager
+
+<div class="text-center">
+    <h1 class="display-4">Welcome, Boss</h1>
+    <h3>Login</h3>
+</div>
+<form class="mt-4" asp-action="Login" asp-controller="Home">
+    <div class="form-group">
+        <label asp-for="LoginEmail"></label>
+        <span class = "text-danger" asp-validation-for="LoginEmail"></span>
+        <input class="form-control" asp-for="LoginEmail">
+    </div>
+    <div class="form-group">
+        <label asp-for="LoginPassword"></label>
+        <span class = "text-danger" asp-validation-for="LoginPassword"></span>
+        <input class="form-control" asp-for="LoginPassword">
+    </div>
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary mt-4">Submit</button>
+    </div>
+</form>
+<div class="text-center mt-4">
+    <a asp-action="RegistrationPage" asp-controller="Home">Don't have an account? Register here!</a>
+</div>

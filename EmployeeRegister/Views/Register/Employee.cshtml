@@ -1,0 +1,89 @@
+@{
+    ViewData["Title"] = "Employee Page";
+}
+
+@model Employee
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container">
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="Dashboard">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="AllShifts">All Shifts</a>
+                </li>
+            </ul>
+        </div>
+        <div class="text-right">
+            <form asp-action="Logout" asp-controller="Home">
+                <button type="submit" class="btn btn-link">Logout</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="text-center">
+    <h1 class="display-4">@Model.FirstName @Model.LastName's Employee Information</h1>
+</div>
+
+<div class="container mt-3">
+    <div class="container border border-dark rounded">
+        <b>General Information</b>
+        <p class="ml-5">Employee ID: @Model.EmployeeId</p>
+        <p class="ml-5">Hire Date: @Model.HireDate.ToString("MMMM dd, yyyy")</p>
+        <p class="ml-5">Job Position: @Model.Position</p>
+        <p class="ml-5">Date Of Birth: @Model.DOB.ToString("MMMM dd, yyyy")</p>
+        @{
+            int age = @DateTime.Now.Year - @Model.DOB.Year;
+            <p class="ml-5">Age: @age</p>
+        }
+        <p class="ml-5">Salary: $@Model.Salary</p>
+        <b>Contact Information</b>
+        <p class="ml-5">Phone Number: @Model.PhoneNumber</p>
+        <p class="ml-5">Email: @Model.Email</p>
+    </div>
+</div>
+<div class="container mt-3">
+    <h2>Shifts</h2>
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Day of the Week</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Hours</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (WorkShift w in Model.Shifts)
+            {
+                if (w.Date >= DateTime.Now)
+                {
+                    <tr>
+                        <th scope="row">@w.Date.ToString("MMMM dd, yyyy")</th>
+                        <td>@w.Date.ToString("dddd")</td>
+                        <td>@w.StartTime.ToString("hh:mm tt")</td>
+                        <td>@w.EndTime.ToString("hh:mm tt")</td>
+                        @{
+                            int hours = w.EndTime.Hour - w.StartTime.Hour;
+                            <td>@hours</td>
+                        }
+                        <td><a type="button" class="btn btn-warning" asp-action="EditShiftPage" asp-controller="Register"
+                        asp-route-shiftid=@w.WorkShiftId>Edit</a>
+                            | <form class="d-inline" asp-action="DeleteShift" asp-controller="Register"
+                        asp-route-shiftid=@w.WorkShiftId><button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <div class="text-right">
+        <a class="btn btn-primary mt-3" asp-action="NewShiftPage" role="button">Add New Shift</a>
+    </div>
+</div>

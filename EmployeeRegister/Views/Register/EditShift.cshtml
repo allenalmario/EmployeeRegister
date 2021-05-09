@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Edit Shift Page";
+}
+
+@model WorkShift
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container">
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="Dashboard">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="AllShifts">All Shifts</a>
+                </li>
+            </ul>
+        </div>
+        <div class="text-right">
+            <form asp-action="Logout" asp-controller="Home">
+                <button type="submit" class="btn btn-link">Logout</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="text-center">
+    <h1 class="display-4">Edit Shift Page</h1>
+    <h3>Edit Shift below</h3>
+</div>
+<form class="mt-4" asp-action="EditShift" asp-controller="Register">
+    <div class="form-group">
+        <label asp-for="Date"></label>
+        <span class = "text-danger" asp-validation-for="Date"></span>
+        <input class="form-control" asp-for="Date">
+    </div>
+    <div class="form-group">
+        <label asp-for="EmployeeId"></label>
+        <span class = "text-danger" asp-validation-for="EmployeeId"></span>
+        <select class="form-control" asp-for="EmployeeId">
+            @foreach (Employee e in ViewBag.allMyEmployees)
+            {
+                <option value=@e.EmployeeId>@e.FirstName @e.LastName</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="StartTime"></label>
+        <span class = "text-danger" asp-validation-for="StartTime"></span>
+        <input class="form-control" asp-for="StartTime">
+    </div>
+    <div class="form-group">
+        <label asp-for="EndTime"></label>
+        <span class = "text-danger" asp-validation-for="EndTime"></span>
+        <input class="form-control" asp-for="EndTime">
+    </div>
+    <div class="text-right mt-4">
+        <button type="submit" class="btn btn-primary">Edit Shift</button>
+    </div>
+</form>
+<div class="text-right mt-3">
+        <a href="/Dashboard">Cancel</a>
+</div>

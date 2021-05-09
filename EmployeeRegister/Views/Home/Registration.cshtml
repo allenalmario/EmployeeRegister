@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Registraion Page";
+}
+
+@model Manager
+
+<div class="text-center">
+    <h1 class="display-4">Welcome, New Manager</h1>
+    <h3>Register</h3>
+</div>
+<form class="mt-4" asp-action="Registration" asp-controller="Home">
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <span class = "text-danger" asp-validation-for="FirstName"></span>
+        <input class="form-control" asp-for="FirstName">
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <span class = "text-danger" asp-validation-for="LastName"></span>
+        <input class="form-control" asp-for="LastName">
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <span class = "text-danger" asp-validation-for="Email"></span>
+        <input class="form-control" asp-for="Email">
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <span class = "text-danger" asp-validation-for="Password"></span>
+        <input class="form-control" asp-for="Password">
+    </div>
+    <div class="form-group">
+        <label asp-for="ConfirmPassword"></label>
+        <span class = "text-danger" asp-validation-for="ConfirmPassword"></span>
+        <input class="form-control" asp-for="ConfirmPassword">
+    </div>
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary mt-4">Submit</button>
+    </div>
+</form>
+<div class="text-center mt-4">
+    <a asp-action="Index" asp-controller="Home">Already have an Account? Login here!</a>
+</div> 
